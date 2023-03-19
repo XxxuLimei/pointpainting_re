@@ -73,3 +73,15 @@ Delete or move all the pkl files. Re-generate the data infos by running the foll
 python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml
 ```  
 - 使用`python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml`重新分割。  
+- 这里修改路径应该在`detector/pcdet/datasets/kitti/kitti_dataset.py`的434行`create_kitti_infos`中修改；  
+```
+Database Pedestrian: 2207
+Database Car: 14357
+Database Cyclist: 734
+Database Van: 1297
+Database Truck: 488
+Database Tram: 224
+Database Misc: 337
+Database Person_sitting: 56
+---------------Data preparation Done---------------
+```  
