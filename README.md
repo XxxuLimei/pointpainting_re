@@ -85,3 +85,6 @@ Database Misc: 337
 Database Person_sitting: 56
 ---------------Data preparation Done---------------
 ```  
+- 人傻了，我应该先painted lidar信息的，不然train的时候找不到painted lidar...  
+- 在paint.py中修改kitti数据集的路径(第17行)，就开始慢慢烤gpu了；  
+- 
