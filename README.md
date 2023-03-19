@@ -87,4 +87,25 @@ Database Person_sitting: 56
 ```  
 - 人傻了，我应该先painted lidar信息的，不然train的时候找不到painted lidar...  
 - 在paint.py中修改kitti数据集的路径(第17行)，就开始慢慢烤gpu了；  
-- 
+- 三个半小时，painted完毕！  
+```
+(base) xilm@xilm-MS-7D17:~/fuxian/PointPainting/painting$ python painting.py
+Using Segmentation Network -- deeplabv3plus
+load checkpoint from local path: ./mmseg/checkpoints/deeplabv3plus_r101-d8_512x1024_80k_cityscapes_20200606_114143-068fcfe9.pth
+  0%|                                                                                             | 0/7481 [00:00<?, ?it/s]/home/xilm/fuxian/PointPainting/painting/painting.py:94: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  output_permute = torch.tensor(result[0]).permute(1,2,0) # H, W, 19
+100%|████████████████████████████████████████████████████████████████████████████████| 7481/7481 [3:25:43<00:00,  1.65s/it]
+```  
+- 接下来开始准备kitti数据集：`python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml`  
+```
+Database Pedestrian: 2207
+Database Car: 14357
+Database Cyclist: 734
+Database Van: 1297
+Database Truck: 488
+Database Tram: 224
+Database Misc: 337
+Database Person_sitting: 56
+---------------Data preparation Done---------------
+```  
+- 准备训练：`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
