@@ -109,3 +109,5 @@ Database Person_sitting: 56
 ---------------Data preparation Done---------------
 ```  
 - 准备训练：`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
+## 0320:  
+- 训练完毕，获得ckpt。  
