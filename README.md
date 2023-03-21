@@ -111,3 +111,26 @@ Database Person_sitting: 56
 - 准备训练：`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
 ## 0320:  
 - 训练完毕，获得ckpt。  
+## 0321:  
+- 绘制demo：`python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ../output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --data_path /home/xilm/kitti/KITTI/training/painted_lidar/000000.npy --ext .npy`  
+```
+2023-03-21 11:04:37,869   INFO  -----------------Quick Demo of OpenPCDet-------------------------
+2023-03-21 11:04:37,869   INFO  Total number of samples:        1
+/home/xilm/anaconda3/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+2023-03-21 11:04:39,778   INFO  ==> Loading parameters from checkpoint ../output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth to CPU
+2023-03-21 11:04:39,811   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-03-21 11:04:39,860   INFO  ==> Done (loaded 127/127)
+2023-03-21 11:04:39,869   INFO  Visualized sample index:        1
+[[ 38  38  38 255]
+ [ 38  38  38 255]
+ [ 38  38  38 255]
+ ...
+ [ 39  39  39 255]
+ [ 39  39  39 255]
+ [ 39  39  39 255]]
+2023-03-21 11:05:53,338   INFO  Demo done.
+```  
+![927a8aa440e022d92a73f356d1b1c63](https://user-images.githubusercontent.com/96283702/226508906-ac1ee7e1-06b6-4534-9eef-b3fe9ae32420.png)  
+
+以上就是完整的pointpainting复现过程。
