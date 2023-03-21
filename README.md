@@ -111,6 +111,7 @@ Database Person_sitting: 56
 - 准备训练：`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
 ## 0320:  
 - 训练完毕，获得ckpt。  
+- 这里我把我的权重文件贴出来：链接: https://pan.baidu.com/s/1F8L77nrRQmrY4vIDnGHrZw?pwd=grv2 提取码: grv2   
 ## 0321:  
 - 绘制demo：`python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ../output/kitti_models/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --data_path /home/xilm/kitti/KITTI/training/painted_lidar/000000.npy --ext .npy`  
 ```
