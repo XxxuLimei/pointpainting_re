@@ -139,4 +139,5 @@ Database Person_sitting: 56
 - 阅读了painting.py的代码，写了注释。  
 - 准备复现pointpainting使用sequence的方法，用于在RViz上实现。  
 - 安装了一下午tensorrt，头秃。。。  
-- 
+- 复现了demo.py, demo_video.py, 以及visualizer.py，结果如下，可以看到着色的点云；不过需要注意，只有视野范围内的点云被着色了，也就是车前方-45～45度的视角。  
+
