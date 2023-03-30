@@ -136,5 +136,7 @@ Database Person_sitting: 56
 
 以上就是完整的pointpainting复现过程。  
 ## 0330：  
-阅读了painting.py的代码，写了注释。  
-准备复现pointpainting使用sequence的方法，用于在RViz上实现。  
+- 阅读了painting.py的代码，写了注释。  
+- 准备复现pointpainting使用sequence的方法，用于在RViz上实现。  
+- 安装了一下午tensorrt，头秃。。。  
+- 
