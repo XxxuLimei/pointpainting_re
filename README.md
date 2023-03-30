@@ -134,4 +134,7 @@ Database Person_sitting: 56
 ```  
 ![927a8aa440e022d92a73f356d1b1c63](https://user-images.githubusercontent.com/96283702/226508906-ac1ee7e1-06b6-4534-9eef-b3fe9ae32420.png)  
 
-以上就是完整的pointpainting复现过程。
+以上就是完整的pointpainting复现过程。  
+## 0330：  
+阅读了painting.py的代码，写了注释。  
+准备复现pointpainting使用sequence的方法，用于在RViz上实现。  
