@@ -141,4 +141,6 @@ Database Person_sitting: 56
 - 安装了一下午tensorrt，头秃。。。  
 - 复现了demo.py, demo_video.py, 以及visualizer.py，结果如下，可以看到着色的点云；不过需要注意，只有视野范围内的点云被着色了，也就是车前方-45～45度的视角。  
 ![](https://github.com/XxxuLimei/pointpainting_re/blob/main/picture/Screenshot%20from%202023-03-30%2021-13-44.png)  
-
+## 0418:  
+1. 准备做一组消融实验，就是控制语义分割网络不变，然后变点云检测方法，以及换过来。  
+2. 首先是`deeplabv3`
