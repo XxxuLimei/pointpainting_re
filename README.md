@@ -157,5 +157,5 @@ Database Misc: 337
 Database Person_sitting: 56
 ---------------Data preparation Done---------------
 ```  
-2. 准备检测：  
-3. 
+2. 准备检测：首先使用pointpillar_painted配置文件进行检测。  
+3. 接下来进行voxel_rcnn进行检测。  
