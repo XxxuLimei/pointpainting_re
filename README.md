@@ -145,19 +145,10 @@ Database Person_sitting: 56
 1. 准备做一组消融实验，就是控制语义分割网络不变，然后变点云检测方法，以及换过来。  
 2. 首先是`deeplabv3`
 ## 0419：  
-1. painted.py完毕，进行数据集准备：  
-```
-Database Pedestrian: 2207
-Database Car: 14357
-Database Cyclist: 734
-Database Van: 1297
-Database Truck: 488
-Database Tram: 224
-Database Misc: 337
-Database Person_sitting: 56
----------------Data preparation Done---------------
-```  
+1. painted.py完毕;  
 2. 准备检测：首先使用pointpillar_painted配置文件进行检测。  
 - 经过对比发现，`pointpillar_painted`仅仅在`DATA_CONFIG->_BASE_CONFIG_->`以及`DATA_CONFIG->DATA_AUGMENTOR->AUG_CONFIG_LIST->NUM_POINT_FEATURES`两处进行了修改。  
+- 运行`python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml`  
+- 运行`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
 3. 接下来进行pvrcnn进行检测。  
 - 首先获得`pvrcnn_painted.yaml`文件  
