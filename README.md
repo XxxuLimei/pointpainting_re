@@ -158,4 +158,6 @@ Database Person_sitting: 56
 ---------------Data preparation Done---------------
 ```  
 2. 准备检测：首先使用pointpillar_painted配置文件进行检测。  
-3. 接下来进行voxel_rcnn进行检测。  
+- 经过对比发现，`pointpillar_painted`仅仅在`DATA_CONFIG->_BASE_CONFIG_->`以及`DATA_CONFIG->DATA_AUGMENTOR->AUG_CONFIG_LIST->NUM_POINT_FEATURES`两处进行了修改。  
+3. 接下来进行pvrcnn进行检测。  
+- 首先获得`pvrcnn_painted.yaml`文件  
