@@ -144,3 +144,18 @@ Database Person_sitting: 56
 ## 0418:  
 1. 准备做一组消融实验，就是控制语义分割网络不变，然后变点云检测方法，以及换过来。  
 2. 首先是`deeplabv3`
+## 0419：  
+1. painted.py完毕，进行数据集准备：  
+```
+Database Pedestrian: 2207
+Database Car: 14357
+Database Cyclist: 734
+Database Van: 1297
+Database Truck: 488
+Database Tram: 224
+Database Misc: 337
+Database Person_sitting: 56
+---------------Data preparation Done---------------
+```  
+2. 准备检测：  
+3. 
