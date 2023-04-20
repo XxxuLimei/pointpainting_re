@@ -151,6 +151,7 @@ Database Person_sitting: 56
 - 运行`python -m pcdet.datasets.kitti.painted_kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/painted_kitti_dataset.yaml`  
 - 运行`python train.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml`  
 - 无需运行`python test.py --ckpt /home/xilm/fuxian/PointPainting/detector/output/pointpillar_painted/default/ckpt/checkpoint_epoch_80.pth --batch_size 4 --cfg_file ./cfgs/kitti_models/pointpillar_painted.yaml`,因为已经评估好了。  
+- 运行`python demo.py --cfg_file cfgs/kitti_models/pointpillar_painted.yaml --ckpt ../output/pointpillar_painted/default/ckpt/checkpoint_epoch_80_deeplab_pointpillar.pth --data_path /home/xilm/kitti/KITTI/training/painted_lidar/000000.npy --ext .npy`,获得可视化结果。  
 3. 接下来进行pvrcnn进行检测。  
 - 首先获得`pvrcnn_painted.yaml`文件  
 ## 0420：  
