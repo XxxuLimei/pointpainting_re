@@ -155,4 +155,10 @@ Database Person_sitting: 56
 3. 接下来进行pvrcnn进行检测。  
 - 首先获得`pvrcnn_painted.yaml`文件  
 ## 0420：  
-1. 使用pv_rcnn进行检测：
+1. 使用pv_rcnn进行检测  
+## 0423:  
+1. 使用voxel_rcnn进行检测  
+## 0425：  
+1. 在deeplabv3下的三种点云检测模型都检测完毕；  
+2. 使用tensorboard查看实时loss下降结果的方法：`tensorboard --logdir=/home/xilm/fuxian/PointPainting/detector/output/voxel_rcnn_pointed/default/tensorboard --port=18888`  
+3. 接下来使用deeplabv3+进行点云绘制。  
