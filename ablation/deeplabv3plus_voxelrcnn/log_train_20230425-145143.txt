@@ -1,0 +1,1312 @@
+2023-04-25 14:51:43,221   INFO  **********************Start logging**********************
+2023-04-25 14:51:43,222   INFO  CUDA_VISIBLE_DEVICES=ALL
+2023-04-25 14:51:43,222   INFO  cfg_file         cfgs/kitti_models/voxel_rcnn_pointed.yaml
+2023-04-25 14:51:43,222   INFO  batch_size       2
+2023-04-25 14:51:43,222   INFO  epochs           80
+2023-04-25 14:51:43,222   INFO  workers          8
+2023-04-25 14:51:43,222   INFO  extra_tag        default
+2023-04-25 14:51:43,222   INFO  ckpt             None
+2023-04-25 14:51:43,222   INFO  pretrained_model None
+2023-04-25 14:51:43,222   INFO  launcher         none
+2023-04-25 14:51:43,222   INFO  tcp_port         18888
+2023-04-25 14:51:43,222   INFO  sync_bn          False
+2023-04-25 14:51:43,222   INFO  fix_random_seed  False
+2023-04-25 14:51:43,222   INFO  ckpt_save_interval 1
+2023-04-25 14:51:43,222   INFO  local_rank       0
+2023-04-25 14:51:43,222   INFO  max_ckpt_save_num 30
+2023-04-25 14:51:43,222   INFO  merge_all_iters_to_one_epoch False
+2023-04-25 14:51:43,222   INFO  set_cfgs         None
+2023-04-25 14:51:43,222   INFO  max_waiting_mins 0
+2023-04-25 14:51:43,222   INFO  start_epoch      0
+2023-04-25 14:51:43,222   INFO  save_to_file     False
+2023-04-25 14:51:43,222   INFO  cfg.ROOT_DIR: /home/xilm/fuxian/PointPainting/detector
+2023-04-25 14:51:43,222   INFO  cfg.LOCAL_RANK: 0
+2023-04-25 14:51:43,222   INFO  cfg.CLASS_NAMES: ['Car', 'Pedestrian', 'Cyclist']
+2023-04-25 14:51:43,222   INFO  
+cfg.DATA_CONFIG = edict()
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATASET: PaintedKittiDataset
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_PATH: /home/xilm/kitti/KITTI
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.POINT_CLOUD_RANGE: [0, -40, -3, 70.4, 40, 1]
+2023-04-25 14:51:43,222   INFO  
+cfg.DATA_CONFIG.DATA_SPLIT = edict()
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_SPLIT.train: train
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_SPLIT.test: val
+2023-04-25 14:51:43,222   INFO  
+cfg.DATA_CONFIG.INFO_PATH = edict()
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.INFO_PATH.train: ['kitti_infos_train.pkl']
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.INFO_PATH.test: ['kitti_infos_val.pkl']
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.FOV_POINTS_ONLY: True
+2023-04-25 14:51:43,222   INFO  
+cfg.DATA_CONFIG.DATA_AUGMENTOR = edict()
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.DISABLE_AUG_LIST: ['placeholder']
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_AUGMENTOR.AUG_CONFIG_LIST: [{'NAME': 'gt_sampling', 'USE_ROAD_PLANE': True, 'DB_INFO_PATH': ['kitti_dbinfos_train.pkl'], 'PREPARE': {'filter_by_min_points': ['Car:5', 'Pedestrian:5', 'Cyclist:5'], 'filter_by_difficulty': [-1]}, 'SAMPLE_GROUPS': ['Car:15', 'Pedestrian:10', 'Cyclist:10'], 'NUM_POINT_FEATURES': 8, 'DATABASE_WITH_FAKELIDAR': False, 'REMOVE_EXTRA_WIDTH': [0.0, 0.0, 0.0], 'LIMIT_WHOLE_SCENE': False}, {'NAME': 'random_world_flip', 'ALONG_AXIS_LIST': ['x']}, {'NAME': 'random_world_rotation', 'WORLD_ROT_ANGLE': [-0.78539816, 0.78539816]}, {'NAME': 'random_world_scaling', 'WORLD_SCALE_RANGE': [0.95, 1.05]}]
+2023-04-25 14:51:43,222   INFO  
+cfg.DATA_CONFIG.POINT_FEATURE_ENCODING = edict()
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.encoding_type: absolute_coordinates_encoding
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.used_feature_list: ['x', 'y', 'z', 'intensity', 's0', 's1', 's2', 's3']
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.POINT_FEATURE_ENCODING.src_feature_list: ['x', 'y', 'z', 'intensity', 's0', 's1', 's2', 's3']
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG.DATA_PROCESSOR: [{'NAME': 'mask_points_and_boxes_outside_range', 'REMOVE_OUTSIDE_BOXES': True}, {'NAME': 'shuffle_points', 'SHUFFLE_ENABLED': {'train': True, 'test': False}}, {'NAME': 'transform_points_to_voxels', 'VOXEL_SIZE': [0.05, 0.05, 0.1], 'MAX_POINTS_PER_VOXEL': 5, 'MAX_NUMBER_OF_VOXELS': {'train': 16000, 'test': 40000}}]
+2023-04-25 14:51:43,222   INFO  cfg.DATA_CONFIG._BASE_CONFIG_: /home/xilm/fuxian/PointPainting/detector/tools/cfgs/dataset_configs/painted_kitti_dataset.yaml
+2023-04-25 14:51:43,222   INFO  
+cfg.MODEL = edict()
+2023-04-25 14:51:43,222   INFO  cfg.MODEL.NAME: VoxelRCNN
+2023-04-25 14:51:43,222   INFO  
+cfg.MODEL.VFE = edict()
+2023-04-25 14:51:43,222   INFO  cfg.MODEL.VFE.NAME: MeanVFE
+2023-04-25 14:51:43,222   INFO  
+cfg.MODEL.BACKBONE_3D = edict()
+2023-04-25 14:51:43,222   INFO  cfg.MODEL.BACKBONE_3D.NAME: VoxelBackBone8x
+2023-04-25 14:51:43,222   INFO  
+cfg.MODEL.MAP_TO_BEV = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.MAP_TO_BEV.NAME: HeightCompression
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.MAP_TO_BEV.NUM_BEV_FEATURES: 256
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.BACKBONE_2D = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.NAME: BaseBEVBackbone
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.LAYER_NUMS: [4, 4]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.LAYER_STRIDES: [1, 2]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.NUM_FILTERS: [64, 128]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.UPSAMPLE_STRIDES: [1, 2]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.BACKBONE_2D.NUM_UPSAMPLE_FILTERS: [128, 128]
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.DENSE_HEAD = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.NAME: AnchorHeadSingle
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.CLASS_AGNOSTIC: False
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.USE_DIRECTION_CLASSIFIER: True
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.DIR_OFFSET: 0.78539
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.DIR_LIMIT_OFFSET: 0.0
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.NUM_DIR_BINS: 2
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.ANCHOR_GENERATOR_CONFIG: [{'class_name': 'Car', 'anchor_sizes': [[3.9, 1.6, 1.56]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-1.78], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.6, 'unmatched_threshold': 0.45}, {'class_name': 'Pedestrian', 'anchor_sizes': [[0.8, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}, {'class_name': 'Cyclist', 'anchor_sizes': [[1.76, 0.6, 1.73]], 'anchor_rotations': [0, 1.57], 'anchor_bottom_heights': [-0.6], 'align_center': False, 'feature_map_stride': 8, 'matched_threshold': 0.5, 'unmatched_threshold': 0.35}]
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NAME: AxisAlignedTargetAssigner
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.POS_FRACTION: -1.0
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.SAMPLE_SIZE: 512
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.NORM_BY_NUM_EXAMPLES: False
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.MATCH_HEIGHT: False
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.TARGET_ASSIGNER_CONFIG.BOX_CODER: ResidualCoder
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG = edict()
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.cls_weight: 1.0
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.loc_weight: 2.0
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.dir_weight: 0.2
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.DENSE_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.ROI_HEAD = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NAME: VoxelRCNNHead
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.CLASS_AGNOSTIC: True
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.SHARED_FC: [256, 256]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.CLS_FC: [256, 256]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.REG_FC: [256, 256]
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.DP_RATIO: 0.3
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG = edict()
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_TYPE: nms_gpu
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.MULTI_CLASSES_NMS: False
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_PRE_MAXSIZE: 9000
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_POST_MAXSIZE: 512
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TRAIN.NMS_THRESH: 0.8
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_TYPE: nms_gpu
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.MULTI_CLASSES_NMS: False
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.USE_FAST_NMS: True
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.SCORE_THRESH: 0.0
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_PRE_MAXSIZE: 2048
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_POST_MAXSIZE: 100
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.NMS_CONFIG.TEST.NMS_THRESH: 0.7
+2023-04-25 14:51:43,223   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL = edict()
+2023-04-25 14:51:43,223   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.FEATURES_SOURCE: ['x_conv3', 'x_conv4']
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.PRE_MLP: True
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.GRID_SIZE: 6
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS = edict()
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3 = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.MLPS: [[32, 32], [32, 32]]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.QUERY_RANGES: [[2, 2, 2], [4, 4, 4]]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.POOL_RADIUS: [0.4, 0.8]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.NSAMPLE: [16, 16]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv3.POOL_METHOD: max_pool
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4 = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.MLPS: [[32, 32], [32, 32]]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.QUERY_RANGES: [[2, 2, 2], [4, 4, 4]]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.POOL_RADIUS: [0.8, 1.6]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.NSAMPLE: [16, 16]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.ROI_GRID_POOL.POOL_LAYERS.x_conv4.POOL_METHOD: max_pool
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.TARGET_CONFIG = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.BOX_CODER: ResidualCoder
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.ROI_PER_IMAGE: 128
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.FG_RATIO: 0.5
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.SAMPLE_ROI_BY_EACH_CLASS: True
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_SCORE_TYPE: roi_iou
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_FG_THRESH: 0.75
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_BG_THRESH: 0.25
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.CLS_BG_THRESH_LO: 0.1
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.HARD_BG_RATIO: 0.8
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.TARGET_CONFIG.REG_FG_THRESH: 0.55
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.LOSS_CONFIG = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.CLS_LOSS: BinaryCrossEntropy
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.REG_LOSS: smooth-l1
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.CORNER_LOSS_REGULARIZATION: True
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.GRID_3D_IOU_LOSS: False
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_cls_weight: 1.0
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_reg_weight: 1.0
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_corner_weight: 1.0
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.rcnn_iou3d_weight: 1.0
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.ROI_HEAD.LOSS_CONFIG.LOSS_WEIGHTS.code_weights: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.POST_PROCESSING = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.RECALL_THRESH_LIST: [0.3, 0.5, 0.7]
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.SCORE_THRESH: 0.3
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.OUTPUT_RAW_SCORE: False
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.EVAL_METRIC: kitti
+2023-04-25 14:51:43,224   INFO  
+cfg.MODEL.POST_PROCESSING.NMS_CONFIG = edict()
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.MULTI_CLASSES_NMS: False
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_TYPE: nms_gpu
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_THRESH: 0.1
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_PRE_MAXSIZE: 4096
+2023-04-25 14:51:43,224   INFO  cfg.MODEL.POST_PROCESSING.NMS_CONFIG.NMS_POST_MAXSIZE: 500
+2023-04-25 14:51:43,224   INFO  
+cfg.OPTIMIZATION = edict()
+2023-04-25 14:51:43,224   INFO  cfg.OPTIMIZATION.BATCH_SIZE_PER_GPU: 2
+2023-04-25 14:51:43,224   INFO  cfg.OPTIMIZATION.NUM_EPOCHS: 80
+2023-04-25 14:51:43,224   INFO  cfg.OPTIMIZATION.OPTIMIZER: adam_onecycle
+2023-04-25 14:51:43,224   INFO  cfg.OPTIMIZATION.LR: 0.01
+2023-04-25 14:51:43,224   INFO  cfg.OPTIMIZATION.WEIGHT_DECAY: 0.01
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.MOMENTUM: 0.9
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.MOMS: [0.95, 0.85]
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.PCT_START: 0.4
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.DIV_FACTOR: 10
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.DECAY_STEP_LIST: [35, 45]
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.LR_DECAY: 0.1
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.LR_CLIP: 1e-07
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.LR_WARMUP: False
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.WARMUP_EPOCH: 1
+2023-04-25 14:51:43,225   INFO  cfg.OPTIMIZATION.GRAD_NORM_CLIP: 10
+2023-04-25 14:51:43,225   INFO  cfg.TAG: voxel_rcnn_pointed
+2023-04-25 14:51:43,225   INFO  cfg.EXP_GROUP_PATH: kitti_models
+2023-04-25 14:51:43,292   INFO  Database filter by min points Car: 14357 => 13501
+2023-04-25 14:51:43,292   INFO  Database filter by min points Pedestrian: 2207 => 2168
+2023-04-25 14:51:43,292   INFO  Database filter by min points Cyclist: 734 => 704
+2023-04-25 14:51:43,303   INFO  Database filter by difficulty Car: 13501 => 10759
+2023-04-25 14:51:43,305   INFO  Database filter by difficulty Pedestrian: 2168 => 2075
+2023-04-25 14:51:43,306   INFO  Database filter by difficulty Cyclist: 704 => 581
+2023-04-25 14:51:43,345   INFO  Loading KITTI dataset
+2023-04-25 14:51:43,400   INFO  Total samples for KITTI dataset: 3712
+2023-04-25 14:51:44,646   INFO  VoxelRCNN(
+  (vfe): MeanVFE()
+  (backbone_3d): VoxelBackBone8x(
+    (conv_input): SparseSequential(
+      (0): SubMConv3d()
+      (1): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      (2): ReLU()
+    )
+    (conv1): SparseSequential(
+      (0): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(16, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+    )
+    (conv2): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d()
+        (1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (2): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(32, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+    )
+    (conv3): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (2): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+    )
+    (conv4): SparseSequential(
+      (0): SparseSequential(
+        (0): SparseConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (2): SparseSequential(
+        (0): SubMConv3d()
+        (1): BatchNorm1d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+    )
+    (conv_out): SparseSequential(
+      (0): SparseConv3d()
+      (1): BatchNorm1d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+      (2): ReLU()
+    )
+  )
+  (map_to_bev_module): HeightCompression()
+  (pfe): None
+  (backbone_2d): BaseBEVBackbone(
+    (blocks): ModuleList(
+      (0): Sequential(
+        (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+        (1): Conv2d(256, 64, kernel_size=(3, 3), stride=(1, 1), bias=False)
+        (2): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (3): ReLU()
+        (4): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (5): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (6): ReLU()
+        (7): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (8): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (9): ReLU()
+        (10): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (11): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (12): ReLU()
+        (13): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (14): BatchNorm2d(64, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (15): ReLU()
+      )
+      (1): Sequential(
+        (0): ZeroPad2d(padding=(1, 1, 1, 1), value=0.0)
+        (1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), bias=False)
+        (2): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (3): ReLU()
+        (4): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (5): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (6): ReLU()
+        (7): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (8): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (9): ReLU()
+        (10): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (11): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (12): ReLU()
+        (13): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (14): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (15): ReLU()
+      )
+    )
+    (deblocks): ModuleList(
+      (0): Sequential(
+        (0): ConvTranspose2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+      (1): Sequential(
+        (0): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=0.001, momentum=0.01, affine=True, track_running_stats=True)
+        (2): ReLU()
+      )
+    )
+  )
+  (dense_head): AnchorHeadSingle(
+    (cls_loss_func): SigmoidFocalClassificationLoss()
+    (reg_loss_func): WeightedSmoothL1Loss()
+    (dir_loss_func): WeightedCrossEntropyLoss()
+    (conv_cls): Conv2d(256, 18, kernel_size=(1, 1), stride=(1, 1))
+    (conv_box): Conv2d(256, 42, kernel_size=(1, 1), stride=(1, 1))
+    (conv_dir_cls): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (point_head): None
+  (roi_head): VoxelRCNNHead(
+    (proposal_target_layer): ProposalTargetLayer()
+    (reg_loss_func): WeightedSmoothL1Loss()
+    (roi_grid_pool_layers): ModuleList(
+      (0): NeighborVoxelSAModuleMSG(
+        (groupers): ModuleList(
+          (0): VoxelQueryAndGrouping()
+          (1): VoxelQueryAndGrouping()
+        )
+        (mlps_in): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (1): Sequential(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (mlps_pos): ModuleList(
+          (0): Sequential(
+            (0): Conv2d(3, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (1): Sequential(
+            (0): Conv2d(3, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (mlps_out): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+        )
+        (relu): ReLU()
+      )
+      (1): NeighborVoxelSAModuleMSG(
+        (groupers): ModuleList(
+          (0): VoxelQueryAndGrouping()
+          (1): VoxelQueryAndGrouping()
+        )
+        (mlps_in): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (1): Sequential(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (mlps_pos): ModuleList(
+          (0): Sequential(
+            (0): Conv2d(3, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (1): Sequential(
+            (0): Conv2d(3, 32, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            (1): BatchNorm2d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+        )
+        (mlps_out): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+          (1): Sequential(
+            (0): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+            (1): BatchNorm1d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU()
+          )
+        )
+        (relu): ReLU()
+      )
+    )
+    (shared_fc_layer): Sequential(
+      (0): Linear(in_features=27648, out_features=256, bias=False)
+      (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+      (3): Dropout(p=0.3, inplace=False)
+      (4): Linear(in_features=256, out_features=256, bias=False)
+      (5): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU(inplace=True)
+    )
+    (cls_fc_layers): Sequential(
+      (0): Linear(in_features=256, out_features=256, bias=False)
+      (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Dropout(p=0.3, inplace=False)
+      (4): Linear(in_features=256, out_features=256, bias=False)
+      (5): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU()
+    )
+    (cls_pred_layer): Linear(in_features=256, out_features=1, bias=True)
+    (reg_fc_layers): Sequential(
+      (0): Linear(in_features=256, out_features=256, bias=False)
+      (1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU()
+      (3): Dropout(p=0.3, inplace=False)
+      (4): Linear(in_features=256, out_features=256, bias=False)
+      (5): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (6): ReLU()
+    )
+    (reg_pred_layer): Linear(in_features=256, out_features=7, bias=True)
+  )
+)
+2023-04-25 14:51:44,647   INFO  **********************Start training kitti_models/voxel_rcnn_pointed(default)**********************
+2023-04-26 21:49:30,179   INFO  **********************End training kitti_models/voxel_rcnn_pointed(default)**********************
+
+
+
+2023-04-26 21:49:30,182   INFO  **********************Start evaluation kitti_models/voxel_rcnn_pointed(default)**********************
+2023-04-26 21:49:30,227   INFO  Loading KITTI dataset
+2023-04-26 21:49:30,460   INFO  Total samples for KITTI dataset: 3769
+2023-04-26 21:49:30,475   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_70.pth to GPU
+2023-04-26 21:49:30,612   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 21:49:30,824   INFO  ==> Done (loaded 263/263)
+2023-04-26 21:49:30,828   INFO  *************** EPOCH 70 EVALUATION *****************
+2023-04-26 21:54:24,191   INFO  *************** Performance of EPOCH 70 *****************
+2023-04-26 21:54:24,192   INFO  Generate label finished(sec_per_example: 0.0778 second).
+2023-04-26 21:54:24,192   INFO  recall_roi_0.3: 0.970384
+2023-04-26 21:54:24,192   INFO  recall_rcnn_0.3: 0.970953
+2023-04-26 21:54:24,192   INFO  recall_roi_0.5: 0.933705
+2023-04-26 21:54:24,192   INFO  recall_rcnn_0.5: 0.940141
+2023-04-26 21:54:24,192   INFO  recall_roi_0.7: 0.704864
+2023-04-26 21:54:24,192   INFO  recall_rcnn_0.7: 0.761761
+2023-04-26 21:54:24,193   INFO  Average predicted number of objects(3769 samples): 8.028
+2023-04-26 21:54:41,914   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.4621, 89.6307, 89.2739
+bev  AP:90.3491, 88.2647, 87.7717
+3d   AP:89.3966, 84.2558, 78.7310
+aos  AP:97.40, 89.49, 89.02
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.9052, 94.9141, 94.5703
+bev  AP:95.8606, 91.2327, 88.9846
+3d   AP:92.4406, 85.0293, 82.7096
+aos  AP:98.85, 94.73, 94.24
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.4621, 89.6307, 89.2739
+bev  AP:97.5925, 95.4551, 89.2912
+3d   AP:97.5332, 95.3848, 89.2733
+aos  AP:97.40, 89.49, 89.02
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.9052, 94.9141, 94.5703
+bev  AP:98.9427, 96.8845, 94.7509
+3d   AP:98.9249, 96.7475, 94.6925
+aos  AP:98.85, 94.73, 94.24
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:75.2856, 69.2316, 67.0464
+bev  AP:72.0182, 65.4290, 61.8369
+3d   AP:67.8631, 61.8793, 57.1713
+aos  AP:68.34, 62.47, 60.32
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:76.4370, 70.8354, 67.7931
+bev  AP:72.4525, 65.6609, 61.7337
+3d   AP:69.1263, 61.4599, 57.2574
+aos  AP:68.57, 63.20, 60.12
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:75.2856, 69.2316, 67.0464
+bev  AP:79.6155, 76.4358, 73.5718
+3d   AP:79.5837, 76.3758, 73.3818
+aos  AP:68.34, 62.47, 60.32
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:76.4370, 70.8354, 67.7931
+bev  AP:82.2308, 78.2639, 74.9463
+3d   AP:82.1866, 77.5164, 74.7368
+aos  AP:68.57, 63.20, 60.12
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:95.1112, 80.2518, 76.1201
+bev  AP:92.4067, 73.0401, 71.3406
+3d   AP:91.1549, 71.6145, 68.8202
+aos  AP:94.66, 78.99, 74.90
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:96.0015, 81.5632, 78.7487
+bev  AP:93.3556, 75.5216, 71.2720
+3d   AP:91.7335, 73.6062, 69.6491
+aos  AP:95.56, 80.24, 77.38
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:95.1112, 80.2518, 76.1201
+bev  AP:92.9816, 77.0003, 75.5005
+3d   AP:92.9816, 77.0003, 75.5005
+aos  AP:94.66, 78.99, 74.90
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:96.0015, 81.5632, 78.7487
+bev  AP:93.9080, 78.5293, 75.9067
+3d   AP:93.9080, 78.5293, 75.9067
+aos  AP:95.56, 80.24, 77.38
+
+2023-04-26 21:54:41,915   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_70/val
+2023-04-26 21:54:41,915   INFO  ****************Evaluation done.*****************
+2023-04-26 21:54:41,935   INFO  Epoch 70 has been evaluated
+2023-04-26 21:54:41,936   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_71.pth to GPU
+2023-04-26 21:54:42,021   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 21:54:42,234   INFO  ==> Done (loaded 263/263)
+2023-04-26 21:54:42,236   INFO  *************** EPOCH 71 EVALUATION *****************
+2023-04-26 21:59:40,798   INFO  *************** Performance of EPOCH 71 *****************
+2023-04-26 21:59:40,799   INFO  Generate label finished(sec_per_example: 0.0792 second).
+2023-04-26 21:59:40,799   INFO  recall_roi_0.3: 0.974257
+2023-04-26 21:59:40,799   INFO  recall_rcnn_0.3: 0.975396
+2023-04-26 21:59:40,799   INFO  recall_roi_0.5: 0.932794
+2023-04-26 21:59:40,799   INFO  recall_rcnn_0.5: 0.941053
+2023-04-26 21:59:40,799   INFO  recall_roi_0.7: 0.693473
+2023-04-26 21:59:40,799   INFO  recall_rcnn_0.7: 0.755211
+2023-04-26 21:59:40,800   INFO  Average predicted number of objects(3769 samples): 8.604
+2023-04-26 21:59:49,215   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.1840, 89.5049, 89.1290
+bev  AP:90.0911, 88.0129, 87.5298
+3d   AP:88.9543, 79.1918, 78.4628
+aos  AP:96.10, 89.34, 88.89
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.2740, 94.6248, 94.1210
+bev  AP:93.0342, 89.0436, 88.7081
+3d   AP:91.6602, 82.9062, 82.0968
+aos  AP:98.19, 94.41, 93.80
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.1840, 89.5049, 89.1290
+bev  AP:96.2276, 89.5485, 89.1875
+3d   AP:96.1707, 89.5276, 89.1519
+aos  AP:96.10, 89.34, 88.89
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.2740, 94.6248, 94.1210
+bev  AP:98.2631, 94.7774, 94.5306
+3d   AP:98.2226, 94.7237, 94.4614
+aos  AP:98.19, 94.41, 93.80
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:75.2761, 71.5468, 67.3180
+bev  AP:69.8740, 62.8626, 59.6826
+3d   AP:65.9790, 59.8290, 54.9473
+aos  AP:69.39, 65.89, 61.74
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:76.1956, 71.4543, 68.7017
+bev  AP:69.7679, 62.8512, 58.5819
+3d   AP:67.1023, 59.1039, 54.1509
+aos  AP:69.68, 65.29, 62.30
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:75.2761, 71.5468, 67.3180
+bev  AP:77.5496, 74.5230, 72.0611
+3d   AP:77.5718, 74.4537, 71.9885
+aos  AP:69.39, 65.89, 61.74
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:76.1956, 71.4543, 68.7017
+bev  AP:80.0865, 76.4362, 73.2807
+3d   AP:80.1109, 76.3747, 72.4500
+aos  AP:69.68, 65.29, 62.30
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:88.5953, 80.6897, 76.3491
+bev  AP:93.7575, 72.7331, 70.7629
+3d   AP:84.6457, 70.6833, 68.0794
+aos  AP:88.40, 80.18, 75.83
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.1291, 81.7547, 79.3623
+bev  AP:94.3769, 75.0534, 71.9937
+3d   AP:89.4451, 72.3487, 68.2457
+aos  AP:93.87, 81.22, 78.76
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:88.5953, 80.6897, 76.3491
+bev  AP:94.3164, 76.3525, 71.6497
+3d   AP:94.3164, 76.3525, 71.6497
+aos  AP:88.40, 80.18, 75.83
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.1291, 81.7547, 79.3623
+bev  AP:94.8666, 77.4381, 74.0887
+3d   AP:94.8666, 77.4381, 74.0887
+aos  AP:93.87, 81.22, 78.76
+
+2023-04-26 21:59:49,219   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_71/val
+2023-04-26 21:59:49,219   INFO  ****************Evaluation done.*****************
+2023-04-26 21:59:49,239   INFO  Epoch 71 has been evaluated
+2023-04-26 21:59:49,240   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_72.pth to GPU
+2023-04-26 21:59:49,326   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 21:59:49,539   INFO  ==> Done (loaded 263/263)
+2023-04-26 21:59:49,541   INFO  *************** EPOCH 72 EVALUATION *****************
+2023-04-26 22:04:51,455   INFO  *************** Performance of EPOCH 72 *****************
+2023-04-26 22:04:51,456   INFO  Generate label finished(sec_per_example: 0.0801 second).
+2023-04-26 22:04:51,456   INFO  recall_roi_0.3: 0.973915
+2023-04-26 22:04:51,456   INFO  recall_rcnn_0.3: 0.974200
+2023-04-26 22:04:51,456   INFO  recall_roi_0.5: 0.934503
+2023-04-26 22:04:51,456   INFO  recall_rcnn_0.5: 0.940654
+2023-04-26 22:04:51,456   INFO  recall_roi_0.7: 0.705092
+2023-04-26 22:04:51,456   INFO  recall_rcnn_0.7: 0.758173
+2023-04-26 22:04:51,458   INFO  Average predicted number of objects(3769 samples): 8.198
+2023-04-26 22:04:59,734   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.5588, 89.7845, 89.3329
+bev  AP:90.2750, 88.2924, 87.7690
+3d   AP:89.1926, 84.2134, 78.6771
+aos  AP:96.49, 89.66, 89.13
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.6695, 95.0914, 94.6441
+bev  AP:95.6000, 91.3093, 90.6001
+3d   AP:92.0507, 84.9396, 82.5398
+aos  AP:98.61, 94.92, 94.37
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.5588, 89.7845, 89.3329
+bev  AP:96.6387, 95.6710, 89.3234
+3d   AP:96.5689, 95.6024, 89.3029
+aos  AP:96.49, 89.66, 89.13
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.6695, 95.0914, 94.6441
+bev  AP:98.6797, 97.0289, 94.7637
+3d   AP:98.6605, 96.9357, 94.6940
+aos  AP:98.61, 94.92, 94.37
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:76.0571, 72.2076, 67.6332
+bev  AP:70.3529, 63.6132, 60.4025
+3d   AP:65.7479, 59.9175, 55.2360
+aos  AP:71.36, 67.42, 62.84
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:76.9948, 72.2991, 69.1740
+bev  AP:70.3507, 63.6404, 59.1515
+3d   AP:65.8510, 58.9047, 54.2166
+aos  AP:71.91, 67.02, 63.76
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:76.0571, 72.2076, 67.6332
+bev  AP:78.8427, 75.9190, 73.3758
+3d   AP:78.7982, 75.8329, 73.1785
+aos  AP:71.36, 67.42, 62.84
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:76.9948, 72.2991, 69.1740
+bev  AP:81.5888, 77.9864, 74.6197
+3d   AP:81.5404, 77.8394, 74.3993
+aos  AP:71.91, 67.02, 63.76
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:95.6800, 78.1017, 77.1544
+bev  AP:92.9647, 74.0462, 71.1803
+3d   AP:85.5888, 72.5030, 69.5136
+aos  AP:95.53, 77.39, 76.41
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:96.8536, 81.2783, 78.6275
+bev  AP:94.0220, 76.2636, 71.9041
+3d   AP:90.2070, 73.4176, 69.2593
+aos  AP:96.71, 80.47, 77.82
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:95.6800, 78.1017, 77.1544
+bev  AP:93.6932, 78.0704, 73.5394
+3d   AP:93.6932, 78.0704, 73.5394
+aos  AP:95.53, 77.39, 76.41
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:96.8536, 81.2783, 78.6275
+bev  AP:94.9238, 78.5565, 75.7167
+3d   AP:94.9238, 78.5565, 75.7167
+aos  AP:96.71, 80.47, 77.82
+
+2023-04-26 22:04:59,735   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_72/val
+2023-04-26 22:04:59,735   INFO  ****************Evaluation done.*****************
+2023-04-26 22:04:59,753   INFO  Epoch 72 has been evaluated
+2023-04-26 22:04:59,754   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_73.pth to GPU
+2023-04-26 22:04:59,840   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:05:00,058   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:05:00,060   INFO  *************** EPOCH 73 EVALUATION *****************
+2023-04-26 22:10:04,949   INFO  *************** Performance of EPOCH 73 *****************
+2023-04-26 22:10:04,950   INFO  Generate label finished(sec_per_example: 0.0809 second).
+2023-04-26 22:10:04,950   INFO  recall_roi_0.3: 0.972947
+2023-04-26 22:10:04,950   INFO  recall_rcnn_0.3: 0.973459
+2023-04-26 22:10:04,950   INFO  recall_roi_0.5: 0.934104
+2023-04-26 22:10:04,950   INFO  recall_rcnn_0.5: 0.941451
+2023-04-26 22:10:04,950   INFO  recall_roi_0.7: 0.702472
+2023-04-26 22:10:04,950   INFO  recall_rcnn_0.7: 0.757376
+2023-04-26 22:10:04,952   INFO  Average predicted number of objects(3769 samples): 8.339
+2023-04-26 22:10:13,517   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.2303, 89.5435, 89.1774
+bev  AP:89.9624, 87.8921, 87.5261
+3d   AP:88.8556, 83.6132, 78.4622
+aos  AP:96.19, 89.43, 88.99
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.4096, 94.7217, 94.4357
+bev  AP:95.1418, 90.8108, 90.2631
+3d   AP:91.5806, 84.4727, 82.2579
+aos  AP:98.36, 94.57, 94.18
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.2303, 89.5435, 89.1774
+bev  AP:96.2986, 95.0744, 95.3701
+3d   AP:96.2444, 95.0016, 89.1276
+aos  AP:96.19, 89.43, 88.99
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.4096, 94.7217, 94.4357
+bev  AP:98.4129, 96.7048, 96.3056
+3d   AP:98.3817, 96.5952, 94.4902
+aos  AP:98.36, 94.57, 94.18
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:74.2838, 70.3536, 66.4067
+bev  AP:68.7003, 62.2679, 58.9531
+3d   AP:64.8115, 59.0457, 54.6976
+aos  AP:67.72, 63.81, 60.00
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:75.0510, 70.4185, 67.4722
+bev  AP:68.5490, 61.9523, 57.6531
+3d   AP:64.9193, 58.0711, 53.5747
+aos  AP:67.74, 63.20, 60.20
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:74.2838, 70.3536, 66.4067
+bev  AP:77.8127, 74.7128, 72.3580
+3d   AP:77.7548, 74.5031, 72.1212
+aos  AP:67.72, 63.81, 60.00
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:75.0510, 70.4185, 67.4722
+bev  AP:80.1434, 76.5800, 73.3738
+3d   AP:80.0753, 76.3477, 73.1210
+aos  AP:67.74, 63.20, 60.20
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:96.1020, 77.6111, 76.4993
+bev  AP:92.7843, 72.3898, 70.0547
+3d   AP:85.5172, 71.3766, 68.3841
+aos  AP:95.71, 76.93, 75.80
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:96.7033, 80.7184, 77.8757
+bev  AP:93.4109, 74.4221, 70.3865
+3d   AP:90.6335, 72.0989, 67.9212
+aos  AP:96.31, 79.96, 77.07
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:96.1020, 77.6111, 76.4993
+bev  AP:93.8268, 73.5002, 71.9785
+3d   AP:93.8268, 73.5002, 71.9785
+aos  AP:95.71, 76.93, 75.80
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:96.7033, 80.7184, 77.8757
+bev  AP:94.4836, 75.8349, 73.0197
+3d   AP:94.4836, 75.8349, 73.0197
+aos  AP:96.31, 79.96, 77.07
+
+2023-04-26 22:10:13,518   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_73/val
+2023-04-26 22:10:13,518   INFO  ****************Evaluation done.*****************
+2023-04-26 22:10:13,535   INFO  Epoch 73 has been evaluated
+2023-04-26 22:10:13,537   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_74.pth to GPU
+2023-04-26 22:10:13,620   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:10:13,833   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:10:13,836   INFO  *************** EPOCH 74 EVALUATION *****************
+2023-04-26 22:15:16,173   INFO  *************** Performance of EPOCH 74 *****************
+2023-04-26 22:15:16,175   INFO  Generate label finished(sec_per_example: 0.0802 second).
+2023-04-26 22:15:16,175   INFO  recall_roi_0.3: 0.972320
+2023-04-26 22:15:16,175   INFO  recall_rcnn_0.3: 0.972776
+2023-04-26 22:15:16,175   INFO  recall_roi_0.5: 0.933990
+2023-04-26 22:15:16,175   INFO  recall_rcnn_0.5: 0.939287
+2023-04-26 22:15:16,175   INFO  recall_roi_0.7: 0.704750
+2023-04-26 22:15:16,175   INFO  recall_rcnn_0.7: 0.759597
+2023-04-26 22:15:16,177   INFO  Average predicted number of objects(3769 samples): 8.265
+2023-04-26 22:15:24,597   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.2253, 89.6782, 89.2343
+bev  AP:90.2093, 88.2056, 87.6573
+3d   AP:89.2346, 79.2775, 78.5963
+aos  AP:97.17, 89.56, 89.02
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7227, 94.8413, 94.4678
+bev  AP:95.5331, 91.1167, 88.8401
+3d   AP:92.1837, 83.0863, 82.4314
+aos  AP:98.67, 94.67, 94.17
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.2253, 89.6782, 89.2343
+bev  AP:97.2905, 95.2565, 89.2400
+3d   AP:97.2255, 89.6198, 89.2226
+aos  AP:97.17, 89.56, 89.02
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7227, 94.8413, 94.4678
+bev  AP:98.7317, 96.6878, 94.6320
+3d   AP:98.7081, 94.8600, 94.5835
+aos  AP:98.67, 94.67, 94.17
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:75.6632, 72.2005, 67.9084
+bev  AP:68.9955, 62.6908, 59.8155
+3d   AP:64.9690, 60.0797, 55.3031
+aos  AP:69.11, 65.36, 61.06
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:76.4675, 72.2897, 69.2981
+bev  AP:68.7172, 62.0905, 58.5633
+3d   AP:65.2243, 58.9058, 54.4062
+aos  AP:69.11, 64.71, 61.59
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:75.6632, 72.2005, 67.9084
+bev  AP:78.2007, 75.5735, 72.9599
+3d   AP:78.1436, 75.5182, 72.8239
+aos  AP:69.11, 65.36, 61.06
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:76.4675, 72.2897, 69.2981
+bev  AP:80.6840, 77.4556, 74.2878
+3d   AP:80.6281, 77.3726, 74.1615
+aos  AP:69.11, 64.71, 61.59
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:88.7781, 77.7113, 76.7302
+bev  AP:86.2094, 72.9251, 70.3094
+3d   AP:85.3206, 71.8804, 68.4332
+aos  AP:88.39, 76.67, 75.50
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.0854, 80.8996, 78.2509
+bev  AP:91.1059, 73.8983, 70.7403
+3d   AP:89.9016, 72.5088, 68.4921
+aos  AP:93.64, 79.67, 76.86
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:88.7781, 77.7113, 76.7302
+bev  AP:93.6115, 73.9100, 72.5294
+3d   AP:93.6115, 73.9100, 72.5294
+aos  AP:88.39, 76.67, 75.50
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.0854, 80.8996, 78.2509
+bev  AP:94.0720, 76.3810, 73.6184
+3d   AP:94.0720, 76.3810, 73.6184
+aos  AP:93.64, 79.67, 76.86
+
+2023-04-26 22:15:24,598   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_74/val
+2023-04-26 22:15:24,598   INFO  ****************Evaluation done.*****************
+2023-04-26 22:15:24,617   INFO  Epoch 74 has been evaluated
+2023-04-26 22:15:24,621   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_75.pth to GPU
+2023-04-26 22:15:24,711   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:15:24,927   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:15:24,930   INFO  *************** EPOCH 75 EVALUATION *****************
+2023-04-26 22:20:26,805   INFO  *************** Performance of EPOCH 75 *****************
+2023-04-26 22:20:26,806   INFO  Generate label finished(sec_per_example: 0.0801 second).
+2023-04-26 22:20:26,806   INFO  recall_roi_0.3: 0.972833
+2023-04-26 22:20:26,806   INFO  recall_rcnn_0.3: 0.973402
+2023-04-26 22:20:26,806   INFO  recall_roi_0.5: 0.932282
+2023-04-26 22:20:26,806   INFO  recall_rcnn_0.5: 0.939458
+2023-04-26 22:20:26,806   INFO  recall_roi_0.7: 0.699055
+2023-04-26 22:20:26,806   INFO  recall_rcnn_0.7: 0.752819
+2023-04-26 22:20:26,807   INFO  Average predicted number of objects(3769 samples): 8.240
+2023-04-26 22:20:35,117   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.3522, 89.6611, 89.2206
+bev  AP:90.0630, 88.0271, 87.5662
+3d   AP:89.3202, 84.2537, 78.6842
+aos  AP:97.26, 89.51, 89.01
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8318, 94.8859, 94.4472
+bev  AP:95.4620, 90.9798, 88.7161
+3d   AP:92.3386, 84.9536, 82.6441
+aos  AP:98.74, 94.70, 94.18
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.3522, 89.6611, 89.2206
+bev  AP:97.3804, 95.2043, 89.2433
+3d   AP:97.3229, 95.4197, 89.2149
+aos  AP:97.26, 89.51, 89.01
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8318, 94.8859, 94.4472
+bev  AP:98.8000, 96.6764, 94.6283
+3d   AP:98.7819, 96.5019, 94.5712
+aos  AP:98.74, 94.70, 94.18
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:75.9329, 72.6447, 67.9487
+bev  AP:67.7849, 63.3269, 60.4140
+3d   AP:65.5708, 60.3403, 55.3272
+aos  AP:71.36, 67.56, 63.01
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:76.9371, 72.5731, 69.6647
+bev  AP:69.2182, 62.9982, 59.2242
+3d   AP:65.8467, 59.3536, 54.6943
+aos  AP:71.75, 66.91, 63.83
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:75.9329, 72.6447, 67.9487
+bev  AP:78.9266, 75.8016, 73.2307
+3d   AP:78.8531, 75.6961, 73.0045
+aos  AP:71.36, 67.56, 63.01
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:76.9371, 72.5731, 69.6647
+bev  AP:81.7092, 78.0992, 74.7784
+3d   AP:81.6199, 77.9461, 74.5327
+aos  AP:71.75, 66.91, 63.83
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:96.1161, 77.9936, 76.5780
+bev  AP:93.9295, 73.4643, 70.6743
+3d   AP:86.1818, 72.1539, 68.5095
+aos  AP:95.86, 77.39, 75.93
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:96.6371, 81.0221, 78.2270
+bev  AP:94.6213, 75.4349, 71.2212
+3d   AP:91.4755, 72.8595, 68.4985
+aos  AP:96.37, 80.32, 77.51
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:96.1161, 77.9936, 76.5780
+bev  AP:94.5297, 77.2015, 72.3401
+3d   AP:94.5297, 77.2015, 72.3401
+aos  AP:95.86, 77.39, 75.93
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:96.6371, 81.0221, 78.2270
+bev  AP:95.3004, 77.4950, 73.6421
+3d   AP:95.3004, 77.4950, 73.6421
+aos  AP:96.37, 80.32, 77.51
+
+2023-04-26 22:20:35,119   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_75/val
+2023-04-26 22:20:35,119   INFO  ****************Evaluation done.*****************
+2023-04-26 22:20:35,140   INFO  Epoch 75 has been evaluated
+2023-04-26 22:20:35,142   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_76.pth to GPU
+2023-04-26 22:20:35,230   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:20:35,443   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:20:35,445   INFO  *************** EPOCH 76 EVALUATION *****************
+2023-04-26 22:25:38,372   INFO  *************** Performance of EPOCH 76 *****************
+2023-04-26 22:25:38,373   INFO  Generate label finished(sec_per_example: 0.0804 second).
+2023-04-26 22:25:38,373   INFO  recall_roi_0.3: 0.972548
+2023-04-26 22:25:38,373   INFO  recall_rcnn_0.3: 0.972719
+2023-04-26 22:25:38,373   INFO  recall_roi_0.5: 0.934503
+2023-04-26 22:25:38,373   INFO  recall_rcnn_0.5: 0.940825
+2023-04-26 22:25:38,373   INFO  recall_roi_0.7: 0.710787
+2023-04-26 22:25:38,373   INFO  recall_rcnn_0.7: 0.761704
+2023-04-26 22:25:38,374   INFO  Average predicted number of objects(3769 samples): 7.960
+2023-04-26 22:25:46,585   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.2994, 89.6698, 89.2839
+bev  AP:90.0675, 88.1550, 87.6688
+3d   AP:89.2789, 84.3850, 78.8193
+aos  AP:97.24, 89.53, 89.08
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8101, 94.9564, 94.5862
+bev  AP:95.4906, 91.1367, 88.8567
+3d   AP:92.3280, 85.1174, 82.8073
+aos  AP:98.75, 94.78, 94.32
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.2994, 89.6698, 89.2839
+bev  AP:97.3598, 95.5580, 89.2825
+3d   AP:97.2939, 95.4921, 89.2663
+aos  AP:97.24, 89.53, 89.08
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8101, 94.9564, 94.5862
+bev  AP:98.7922, 96.8885, 94.7015
+3d   AP:98.7674, 96.7509, 94.6663
+aos  AP:98.75, 94.78, 94.32
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:76.1901, 72.5946, 68.0578
+bev  AP:70.7678, 63.4602, 60.1919
+3d   AP:66.6238, 60.7885, 55.6273
+aos  AP:71.59, 67.61, 63.10
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:77.2897, 72.7451, 69.4827
+bev  AP:70.5271, 62.9067, 59.0520
+3d   AP:67.6515, 59.8514, 54.9417
+aos  AP:72.13, 67.14, 63.70
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:76.1901, 72.5946, 68.0578
+bev  AP:78.9232, 75.5513, 72.9424
+3d   AP:78.8615, 75.4575, 72.7858
+aos  AP:71.59, 67.61, 63.10
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:77.2897, 72.7451, 69.4827
+bev  AP:81.6013, 77.6565, 73.3879
+3d   AP:81.5439, 77.5026, 73.2551
+aos  AP:72.13, 67.14, 63.70
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:95.7368, 77.9614, 77.0963
+bev  AP:93.2919, 73.5680, 71.7802
+3d   AP:86.1530, 72.1781, 69.6696
+aos  AP:95.53, 77.24, 76.41
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:96.2659, 81.3011, 78.7038
+bev  AP:93.9187, 76.2575, 72.0118
+3d   AP:90.9246, 73.4187, 69.2670
+aos  AP:96.05, 80.49, 77.92
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:95.7368, 77.9614, 77.0963
+bev  AP:93.8299, 74.2696, 73.1550
+3d   AP:93.8299, 74.2696, 73.1550
+aos  AP:95.53, 77.24, 76.41
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:96.2659, 81.3011, 78.7038
+bev  AP:94.4747, 76.9720, 74.2991
+3d   AP:94.4747, 76.9720, 74.2991
+aos  AP:96.05, 80.49, 77.92
+
+2023-04-26 22:25:46,586   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_76/val
+2023-04-26 22:25:46,586   INFO  ****************Evaluation done.*****************
+2023-04-26 22:25:46,603   INFO  Epoch 76 has been evaluated
+2023-04-26 22:25:46,605   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_77.pth to GPU
+2023-04-26 22:25:46,695   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:25:46,908   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:25:46,909   INFO  *************** EPOCH 77 EVALUATION *****************
+2023-04-26 22:30:51,581   INFO  *************** Performance of EPOCH 77 *****************
+2023-04-26 22:30:51,584   INFO  Generate label finished(sec_per_example: 0.0808 second).
+2023-04-26 22:30:51,584   INFO  recall_roi_0.3: 0.972377
+2023-04-26 22:30:51,584   INFO  recall_rcnn_0.3: 0.972719
+2023-04-26 22:30:51,584   INFO  recall_roi_0.5: 0.933193
+2023-04-26 22:30:51,584   INFO  recall_rcnn_0.5: 0.939344
+2023-04-26 22:30:51,584   INFO  recall_roi_0.7: 0.710388
+2023-04-26 22:30:51,584   INFO  recall_rcnn_0.7: 0.759654
+2023-04-26 22:30:51,586   INFO  Average predicted number of objects(3769 samples): 8.041
+2023-04-26 22:31:00,238   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.2210, 89.6968, 89.2923
+bev  AP:90.2211, 88.2630, 87.7653
+3d   AP:89.2971, 84.6286, 78.8373
+aos  AP:97.17, 89.59, 89.10
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.7230, 94.8981, 94.5334
+bev  AP:95.6197, 91.2734, 88.9587
+3d   AP:92.2812, 85.1365, 82.8091
+aos  AP:98.67, 94.76, 94.28
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.2210, 89.6968, 89.2923
+bev  AP:97.3009, 95.5946, 89.3259
+3d   AP:97.2453, 89.6625, 89.3055
+aos  AP:97.17, 89.59, 89.10
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.7230, 94.8981, 94.5334
+bev  AP:98.7435, 96.6837, 94.7332
+3d   AP:98.7239, 94.9797, 94.6751
+aos  AP:98.67, 94.76, 94.28
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:76.7924, 73.1875, 68.5571
+bev  AP:70.6027, 63.7717, 60.6366
+3d   AP:66.7961, 60.6983, 55.8753
+aos  AP:71.82, 68.02, 63.38
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:77.8252, 73.3668, 70.1569
+bev  AP:70.4511, 63.2632, 59.4038
+3d   AP:67.6650, 59.9743, 55.1683
+aos  AP:72.31, 67.60, 64.18
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:76.7924, 73.1875, 68.5571
+bev  AP:79.6305, 76.3998, 73.6307
+3d   AP:79.5801, 76.2772, 73.4031
+aos  AP:71.82, 68.02, 63.38
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:77.8252, 73.3668, 70.1569
+bev  AP:82.3881, 78.5800, 74.9789
+3d   AP:82.3252, 78.4341, 73.9898
+aos  AP:72.31, 67.60, 64.18
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:88.7468, 81.4303, 76.9118
+bev  AP:86.5638, 73.4099, 70.5632
+3d   AP:85.4349, 71.9011, 68.5715
+aos  AP:88.53, 80.54, 76.00
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.5526, 82.2153, 78.3489
+bev  AP:91.8823, 75.5072, 71.1888
+3d   AP:90.6420, 72.5607, 68.4054
+aos  AP:94.29, 81.30, 77.35
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:88.7468, 81.4303, 76.9118
+bev  AP:93.9127, 77.3383, 72.8529
+3d   AP:93.9127, 77.3383, 72.8529
+aos  AP:88.53, 80.54, 76.00
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.5526, 82.2153, 78.3489
+bev  AP:94.4825, 77.7065, 73.9049
+3d   AP:94.4825, 77.7065, 73.9049
+aos  AP:94.29, 81.30, 77.35
+
+2023-04-26 22:31:00,239   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_77/val
+2023-04-26 22:31:00,239   INFO  ****************Evaluation done.*****************
+2023-04-26 22:31:00,264   INFO  Epoch 77 has been evaluated
+2023-04-26 22:31:00,267   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_78.pth to GPU
+2023-04-26 22:31:00,350   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:31:00,562   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:31:00,565   INFO  *************** EPOCH 78 EVALUATION *****************
+2023-04-26 22:36:01,582   INFO  *************** Performance of EPOCH 78 *****************
+2023-04-26 22:36:01,583   INFO  Generate label finished(sec_per_example: 0.0799 second).
+2023-04-26 22:36:01,583   INFO  recall_roi_0.3: 0.973573
+2023-04-26 22:36:01,583   INFO  recall_rcnn_0.3: 0.973858
+2023-04-26 22:36:01,583   INFO  recall_roi_0.5: 0.934560
+2023-04-26 22:36:01,583   INFO  recall_rcnn_0.5: 0.940597
+2023-04-26 22:36:01,583   INFO  recall_roi_0.7: 0.708680
+2023-04-26 22:36:01,583   INFO  recall_rcnn_0.7: 0.761135
+2023-04-26 22:36:01,584   INFO  Average predicted number of objects(3769 samples): 8.262
+2023-04-26 22:36:09,930   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:96.8276, 89.6654, 89.2640
+bev  AP:90.1538, 88.1798, 87.6961
+3d   AP:89.2612, 84.5006, 78.8237
+aos  AP:96.77, 89.55, 89.07
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.6945, 94.8790, 94.5330
+bev  AP:95.4563, 91.1112, 88.8783
+3d   AP:92.1822, 85.2105, 82.8408
+aos  AP:98.64, 94.72, 94.27
+Car AP@0.70, 0.50, 0.50:
+bbox AP:96.8276, 89.6654, 89.2640
+bev  AP:96.9093, 95.3847, 89.2906
+3d   AP:96.8419, 95.3173, 89.2727
+aos  AP:96.77, 89.55, 89.07
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.6945, 94.8790, 94.5330
+bev  AP:98.7185, 96.8065, 94.7046
+3d   AP:98.6925, 96.6474, 94.6501
+aos  AP:98.64, 94.72, 94.27
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:76.6115, 72.4458, 68.1324
+bev  AP:70.6016, 63.7073, 60.4190
+3d   AP:66.3827, 60.7437, 55.6398
+aos  AP:70.83, 66.51, 62.11
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:77.1677, 72.6565, 69.5112
+bev  AP:70.3940, 63.7899, 59.2402
+3d   AP:67.1258, 59.8593, 54.8842
+aos  AP:71.03, 66.50, 63.02
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:76.6115, 72.4458, 68.1324
+bev  AP:79.2576, 76.2665, 73.5136
+3d   AP:79.2052, 76.1848, 73.3372
+aos  AP:70.83, 66.51, 62.11
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:77.1677, 72.6565, 69.5112
+bev  AP:82.0753, 78.4637, 74.8109
+3d   AP:82.0224, 78.3350, 74.6341
+aos  AP:71.03, 66.50, 63.02
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:89.1318, 78.1317, 76.9298
+bev  AP:87.1519, 73.6307, 70.9444
+3d   AP:86.4165, 72.7151, 69.4737
+aos  AP:88.93, 77.38, 76.08
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.7878, 81.2756, 78.4716
+bev  AP:92.2555, 74.8351, 71.5408
+3d   AP:91.3414, 73.9211, 69.5480
+aos  AP:94.57, 80.39, 77.50
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:89.1318, 78.1317, 76.9298
+bev  AP:94.0437, 74.4423, 72.8374
+3d   AP:94.0437, 74.4423, 72.8374
+aos  AP:88.93, 77.38, 76.08
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.7878, 81.2756, 78.4716
+bev  AP:94.7859, 76.9662, 74.0690
+3d   AP:94.7859, 76.9662, 74.0690
+aos  AP:94.57, 80.39, 77.50
+
+2023-04-26 22:36:09,931   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_78/val
+2023-04-26 22:36:09,931   INFO  ****************Evaluation done.*****************
+2023-04-26 22:36:09,949   INFO  Epoch 78 has been evaluated
+2023-04-26 22:36:09,951   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_79.pth to GPU
+2023-04-26 22:36:10,034   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:36:10,248   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:36:10,250   INFO  *************** EPOCH 79 EVALUATION *****************
+2023-04-26 22:41:13,383   INFO  *************** Performance of EPOCH 79 *****************
+2023-04-26 22:41:13,384   INFO  Generate label finished(sec_per_example: 0.0804 second).
+2023-04-26 22:41:13,384   INFO  recall_roi_0.3: 0.973402
+2023-04-26 22:41:13,384   INFO  recall_rcnn_0.3: 0.973630
+2023-04-26 22:41:13,384   INFO  recall_roi_0.5: 0.934845
+2023-04-26 22:41:13,384   INFO  recall_rcnn_0.5: 0.940141
+2023-04-26 22:41:13,384   INFO  recall_roi_0.7: 0.707427
+2023-04-26 22:41:13,384   INFO  recall_rcnn_0.7: 0.759255
+2023-04-26 22:41:13,385   INFO  Average predicted number of objects(3769 samples): 8.159
+2023-04-26 22:41:21,643   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.4760, 89.6325, 89.2331
+bev  AP:90.0915, 88.1576, 87.6515
+3d   AP:89.2169, 84.1499, 78.7733
+aos  AP:97.40, 89.52, 89.04
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8506, 94.8492, 94.4954
+bev  AP:95.6079, 91.0604, 88.8473
+3d   AP:92.2892, 84.9634, 82.7068
+aos  AP:98.78, 94.69, 94.24
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.4760, 89.6325, 89.2331
+bev  AP:97.5569, 95.3194, 89.2652
+3d   AP:97.4941, 89.6031, 89.2490
+aos  AP:97.40, 89.52, 89.04
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8506, 94.8492, 94.4954
+bev  AP:98.8653, 96.6608, 94.6869
+3d   AP:98.8466, 94.8744, 94.6258
+aos  AP:98.78, 94.69, 94.24
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:76.8090, 72.9213, 68.3293
+bev  AP:70.4051, 63.5672, 60.6229
+3d   AP:66.1151, 60.7326, 55.7837
+aos  AP:71.79, 67.48, 62.83
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:77.6625, 73.1704, 69.9114
+bev  AP:70.2434, 63.1568, 59.2512
+3d   AP:67.2297, 59.9781, 54.9720
+aos  AP:72.12, 67.21, 63.73
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:76.8090, 72.9213, 68.3293
+bev  AP:79.0980, 76.0940, 73.6224
+3d   AP:79.0275, 75.9505, 73.3679
+aos  AP:71.79, 67.48, 62.83
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:77.6625, 73.1704, 69.9114
+bev  AP:81.9922, 78.3986, 74.8334
+3d   AP:81.9162, 78.2396, 74.5984
+aos  AP:72.12, 67.21, 63.73
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:89.0684, 78.0256, 77.0053
+bev  AP:86.9990, 73.3151, 71.1059
+3d   AP:85.9568, 72.1425, 69.0003
+aos  AP:88.87, 77.14, 75.99
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.5618, 81.2379, 78.5663
+bev  AP:91.9174, 75.7287, 71.3460
+3d   AP:90.8344, 73.2680, 69.0703
+aos  AP:94.31, 80.22, 77.49
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:89.0684, 78.0256, 77.0053
+bev  AP:93.9288, 77.6261, 72.9455
+3d   AP:93.9288, 77.6261, 72.9455
+aos  AP:88.87, 77.14, 75.99
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.5618, 81.2379, 78.5663
+bev  AP:94.5897, 77.7606, 74.1116
+3d   AP:94.5897, 77.7606, 74.1116
+aos  AP:94.31, 80.22, 77.49
+
+2023-04-26 22:41:21,644   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_79/val
+2023-04-26 22:41:21,644   INFO  ****************Evaluation done.*****************
+2023-04-26 22:41:21,659   INFO  Epoch 79 has been evaluated
+2023-04-26 22:41:21,661   INFO  ==> Loading parameters from checkpoint /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/ckpt/checkpoint_epoch_80.pth to GPU
+2023-04-26 22:41:21,744   INFO  ==> Checkpoint trained from version: pcdet+0.3.0+0000000
+2023-04-26 22:41:21,959   INFO  ==> Done (loaded 263/263)
+2023-04-26 22:41:21,961   INFO  *************** EPOCH 80 EVALUATION *****************
+2023-04-26 22:46:25,835   INFO  *************** Performance of EPOCH 80 *****************
+2023-04-26 22:46:25,839   INFO  Generate label finished(sec_per_example: 0.0806 second).
+2023-04-26 22:46:25,839   INFO  recall_roi_0.3: 0.973175
+2023-04-26 22:46:25,839   INFO  recall_rcnn_0.3: 0.973289
+2023-04-26 22:46:25,839   INFO  recall_roi_0.5: 0.934731
+2023-04-26 22:46:25,839   INFO  recall_rcnn_0.5: 0.940483
+2023-04-26 22:46:25,839   INFO  recall_roi_0.7: 0.708338
+2023-04-26 22:46:25,839   INFO  recall_rcnn_0.7: 0.760565
+2023-04-26 22:46:25,842   INFO  Average predicted number of objects(3769 samples): 8.119
+2023-04-26 22:46:34,556   INFO  Car AP@0.70, 0.70, 0.70:
+bbox AP:97.5562, 89.6554, 89.2608
+bev  AP:90.0507, 88.1314, 87.6266
+3d   AP:89.2346, 84.2810, 78.8204
+aos  AP:97.49, 89.54, 89.06
+Car AP_R40@0.70, 0.70, 0.70:
+bbox AP:98.8679, 94.9132, 94.5646
+bev  AP:95.5708, 91.0679, 88.8630
+3d   AP:92.3256, 85.0536, 82.7638
+aos  AP:98.80, 94.76, 94.30
+Car AP@0.70, 0.50, 0.50:
+bbox AP:97.5562, 89.6554, 89.2608
+bev  AP:97.6203, 95.4745, 89.2781
+3d   AP:97.5549, 89.6256, 89.2593
+aos  AP:97.49, 89.54, 89.06
+Car AP_R40@0.70, 0.50, 0.50:
+bbox AP:98.8679, 94.9132, 94.5646
+bev  AP:98.8774, 96.7559, 94.7043
+3d   AP:98.8571, 94.9228, 94.6471
+aos  AP:98.80, 94.76, 94.30
+Pedestrian AP@0.50, 0.50, 0.50:
+bbox AP:77.3402, 73.2938, 68.6895
+bev  AP:70.6688, 63.9460, 60.5803
+3d   AP:66.7247, 60.9010, 56.1600
+aos  AP:71.97, 67.58, 62.97
+Pedestrian AP_R40@0.50, 0.50, 0.50:
+bbox AP:77.9598, 73.5594, 70.2289
+bev  AP:70.3331, 63.2770, 59.3268
+3d   AP:67.5197, 60.2547, 55.2613
+aos  AP:72.17, 67.53, 63.95
+Pedestrian AP@0.50, 0.25, 0.25:
+bbox AP:77.3402, 73.2938, 68.6895
+bev  AP:79.4657, 76.3556, 73.7718
+3d   AP:79.4046, 76.2246, 73.5552
+aos  AP:71.97, 67.58, 62.97
+Pedestrian AP_R40@0.50, 0.25, 0.25:
+bbox AP:77.9598, 73.5594, 70.2289
+bev  AP:82.2827, 78.6846, 74.9625
+3d   AP:82.2124, 78.4870, 74.0028
+aos  AP:72.17, 67.53, 63.95
+Cyclist AP@0.50, 0.50, 0.50:
+bbox AP:88.8565, 81.8393, 76.9457
+bev  AP:86.6141, 73.3777, 70.9934
+3d   AP:85.5123, 71.8756, 68.9020
+aos  AP:88.65, 80.82, 75.90
+Cyclist AP_R40@0.50, 0.50, 0.50:
+bbox AP:94.6270, 82.3038, 78.4521
+bev  AP:91.9494, 75.6802, 71.2809
+3d   AP:90.6253, 72.9780, 68.7283
+aos  AP:94.37, 81.24, 77.33
+Cyclist AP@0.50, 0.25, 0.25:
+bbox AP:88.8565, 81.8393, 76.9457
+bev  AP:93.8925, 77.4526, 72.8855
+3d   AP:93.8925, 77.4526, 72.8855
+aos  AP:88.65, 80.82, 75.90
+Cyclist AP_R40@0.50, 0.25, 0.25:
+bbox AP:94.6270, 82.3038, 78.4521
+bev  AP:94.5336, 77.7750, 73.9831
+3d   AP:94.5336, 77.7750, 73.9831
+aos  AP:94.37, 81.24, 77.33
+
+2023-04-26 22:46:34,557   INFO  Result is save to /home/xilm/fuxian/PointPainting/detector/output/kitti_models/voxel_rcnn_pointed/default/eval/eval_with_train/epoch_80/val
+2023-04-26 22:46:34,557   INFO  ****************Evaluation done.*****************
+2023-04-26 22:46:34,585   INFO  Epoch 80 has been evaluated
+2023-04-26 22:47:04,624   INFO  **********************End evaluation kitti_models/voxel_rcnn_pointed(default)**********************
