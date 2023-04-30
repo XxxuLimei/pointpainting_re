@@ -172,6 +172,7 @@ Database Person_sitting: 56
 
 | 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
 |:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Pointpillar               | 87.7518 | 92.0399 | 57.3015 | 61.5971 | 81.5670 | 85.2585 |
 | Deeplabv3_Pointpillar     | 87.0488 | 92.7873 | 59.7824 | 66.7332 | 80.5899 | 88.1952 | 
 | Deeplabv3plus_Pointpillar | 88.8145	| 93.0280	| 58.6507	| 64.9471	| 82.1917	| 87.0623 | 
 | Deeplabv3_pvrcnn          | 91.7842 | 92.9594 | 69.9658 | 72.7107 | 89.4468 | 92.0936 | 
@@ -179,10 +180,12 @@ Database Person_sitting: 56
 | Deeplabv3_voxelrcnn       | 92.5075 | 95.3499 | 64.2595 | 67.4045 | 92.5878 | 93.0751 |
 | Deeplabv3plus_voxelrcnn   | 92.3256 | 95.5708 | 67.5197 | 70.3331 | 90.6253 | 91.9494 |
 
+
 - Moderate mode  
 
 | 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
 |:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Pointpillar               | 78.3964 | 88.0556 | 51.4145 | 56.0143 | 62.8074 | 66.2439 | 
 | Deeplabv3_Pointpillar     | 77.9516 | 87.8021 | 52.7419 | 59.4873 | 61.6325 | 68.4552 | 
 | Deeplabv3plus_Pointpillar | 77.9333	| 87.6655	| 53.0701	| 59.7557	| 63.0031	| 67.3700 | 
 | Deeplabv3_pvrcnn          | 84.5432	| 90.9980	| 61.8915	| 64.9520	| 71.6946	| 74.8322 | 
@@ -194,6 +197,7 @@ Database Person_sitting: 56
 
 | 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
 |:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Pointpillar               | 75.1843 | 86.6625 | 46.8715 | 52.0457 | 58.8314 | 62.2173 | 
 | Deeplabv3_Pointpillar     | 75.3190 | 86.7787 | 48.2330 | 55.3915 | 58.0191 | 64.2489 | 
 | Deeplabv3plus_Pointpillar | 75.1616	| 86.7752	| 48.6049	| 56.1615	| 58.9886	| 63.1139 | 
 | Deeplabv3_pvrcnn          | 82.6717	| 88.8078	| 56.8798	| 60.2252	| 67.2554	| 70.2091 | 
@@ -206,4 +210,6 @@ Database Person_sitting: 56
 - 下载PointPillar, pvrcnn, voxelrcnn训练权重文件；  
 - 测试：`python test.py --cfg_file ./cfgs/kitti_models/pointpillar.yaml --ckpt /home/xilm/Downloads/pointpillar_7728.pth`  
 - 绘制pic demo：在使用Pointpainting里的demo.py脚本绘制纯点云的图时，需要注释掉`visualize_utils.py`中第84行`rgba[:, :3] = pts[:, 5:8] * 255`，这一行是用来着色点云的，纯velodyne点云没有着色信息，所以需要去掉。`python demo.py --cfg_file cfgs/kitti_models/pointpillar.yaml --ckpt /home/xilm/Downloads/pointpillar_7728.pth --data_path /home/xilm/kitti/KITTI/training/velodyne/000000.bin`    
+- 绘制FOV图失败，只能先全景图。。。  
+5. 使用pv_rcnn进行评估。  
 
