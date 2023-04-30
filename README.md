@@ -201,3 +201,8 @@ Database Person_sitting: 56
 | Deeplabv3_voxelrcnn       | 82.9317 | 89.0419 | 52.1230 | 56.5321 | 68.6926 | 70.8189 | 
 | Deeplabv3plus_voxelrcnn   | 82.7638 | 88.8630 | 55.2613 | 59.3268 | 68.7283 | 71.2809 |
 
+4. 重新使用纯点云检测方法进行评估：  
+- 首先准备KITTI数据集：`python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml`  
+- 下载PointPillar, pvrcnn, voxelrcnn训练权重文件；  
+- 测试：`python test.py --cfg_file ./cfgs/kitti_models/pointpillar.yaml --ckpt /home/xilm/Downloads/pointpillar_7728.pth`  
+- 绘制pic demo；  
