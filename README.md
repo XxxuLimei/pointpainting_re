@@ -167,3 +167,15 @@ Database Person_sitting: 56
 `python test.py --cfg_file ./cfgs/kitti_models/pointpillar_painted.yaml --ckpt /home/xilm/Downloads/checkpoint_epoch_80.pth`  
 2. 将所有的权重文件重新下载下来，在kitti数据集上分别验证，看看哪些图的说明结果更好。  
 - KITTI数据集上的2,17,22,31  
+3. 整理一下六个评估结果：  
+- Easy mode  
+
+| 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
+|:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Deeplabv3_Pointpillar     | 87.0488 | 92.7873 | 59.7824 | 66.7332 | 80.5899 | 88.1952 | 
+| Deeplabv3plus_Pointpillar | 88.8145	| 93.0280	| 58.6507	| 64.9471	| 82.1917	| 87.0623 | 
+| Deeplabv3_pvrcnn          | 91.7842 | 92.9594 | 69.9658 | 72.7107 | 89.4468 | 92.0936 | 
+| Deeplabv3plus_pvrcnn      | 91.8943	| 94.6249	| 66.3709	| 68.2514	| 93.2572	| 94.5304 |
+| Deeplabv3_voxelrcnn       | 92.5075 | 95.3499 | 64.2595 | 67.4045 | 92.5878 | 93.0751 |
+| Deeplabv3plus_voxelrcnn   | 92.3256 | 95.5708 | 67.5197 | 70.3331 | 90.6253 | 91.9494 |
+
