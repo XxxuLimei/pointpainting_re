@@ -205,4 +205,5 @@ Database Person_sitting: 56
 - 首先准备KITTI数据集：`python -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_dataset.yaml`  
 - 下载PointPillar, pvrcnn, voxelrcnn训练权重文件；  
 - 测试：`python test.py --cfg_file ./cfgs/kitti_models/pointpillar.yaml --ckpt /home/xilm/Downloads/pointpillar_7728.pth`  
-- 绘制pic demo；  
+- 绘制pic demo：在使用Pointpainting里的demo.py脚本绘制纯点云的图时，需要注释掉`visualize_utils.py`中第84行`rgba[:, :3] = pts[:, 5:8] * 255`，这一行是用来着色点云的，纯velodyne点云没有着色信息，所以需要去掉。`python demo.py --cfg_file cfgs/kitti_models/pointpillar.yaml --ckpt /home/xilm/Downloads/pointpillar_7728.pth --data_path /home/xilm/kitti/KITTI/training/velodyne/000000.bin`    
+
