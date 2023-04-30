@@ -179,3 +179,25 @@ Database Person_sitting: 56
 | Deeplabv3_voxelrcnn       | 92.5075 | 95.3499 | 64.2595 | 67.4045 | 92.5878 | 93.0751 |
 | Deeplabv3plus_voxelrcnn   | 92.3256 | 95.5708 | 67.5197 | 70.3331 | 90.6253 | 91.9494 |
 
+- Moderate mode  
+
+| 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
+|:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Deeplabv3_Pointpillar     | 77.9516 | 87.8021 | 52.7419 | 59.4873 | 61.6325 | 68.4552 | 
+| Deeplabv3plus_Pointpillar | 77.9333	| 87.6655	| 53.0701	| 59.7557	| 63.0031	| 67.3700 | 
+| Deeplabv3_pvrcnn          | 84.5432	| 90.9980	| 61.8915	| 64.9520	| 71.6946	| 74.8322 | 
+| Deeplabv3plus_pvrcnn      | 83.0667	| 90.4686	| 58.1198	| 60.9370	| 74.2496	| 77.0280 |
+| Deeplabv3_voxelrcnn       | 85.1840 | 91.3552 | 56.7385 | 60.8148 | 72.7842 | 74.0956 | 
+| Deeplabv3plus_voxelrcnn   | 85.0536 | 91.0679 | 60.2547 | 63.2770 | 72.9780 | 75.6802 |
+
+- Hard mode  
+
+| 方法 | Car-3D Detection | Car-BEV Detection | Pedestrian-3D Detection | Pedestrian-BEV Detection | Cyclists-3D Detection | Cyclists-BEV Detection |  
+|:------:|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| Deeplabv3_Pointpillar     | 75.3190 | 86.7787 | 48.2330 | 55.3915 | 58.0191 | 64.2489 | 
+| Deeplabv3plus_Pointpillar | 75.1616	| 86.7752	| 48.6049	| 56.1615	| 58.9886	| 63.1139 | 
+| Deeplabv3_pvrcnn          | 82.6717	| 88.8078	| 56.8798	| 60.2252	| 67.2554	| 70.2091 | 
+| Deeplabv3plus_pvrcnn      | 82.4754	| 88.5908	| 53.3453	| 57.0771	| 69.5003	| 72.3781 |
+| Deeplabv3_voxelrcnn       | 82.9317 | 89.0419 | 52.1230 | 56.5321 | 68.6926 | 70.8189 | 
+| Deeplabv3plus_voxelrcnn   | 82.7638 | 88.8630 | 55.2613 | 59.3268 | 68.7283 | 71.2809 |
+
