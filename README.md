@@ -166,3 +166,4 @@ Database Person_sitting: 56
 1. 所有方法都已经运行完成，接下来先把deeplabv3plus_pointpillar对应的test性能测试一下。  
 `python test.py --cfg_file ./cfgs/kitti_models/pointpillar_painted.yaml --ckpt /home/xilm/Downloads/checkpoint_epoch_80.pth`  
 2. 将所有的权重文件重新下载下来，在kitti数据集上分别验证，看看哪些图的说明结果更好。  
+- KITTI数据集上的2,17,22,31  
